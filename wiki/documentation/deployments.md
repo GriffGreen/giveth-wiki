@@ -16,7 +16,7 @@ The Main Donation address is the `Campaign` contract which receives Ether and ge
 ### Contract Relationships
 ```
                               +------------------+
-                              |                  |
+                              |     Parent       |
                               |   MiniMeToken    |
                               |                  |
                               |  0xf7e983781...  |
@@ -27,10 +27,10 @@ The Main Donation address is the `Campaign` contract which receives Ether and ge
                                        |
                                        |
 +------------------+          +--------v---------+
-|                  |          |                  |
+|                  |          |       MYD        |
 |   TokenFactory   |          |   MiniMeToken    |
 |                  <----------+                  |
-|  0x63a5aeb18...  |          |  0xa5a8ab2c6...  |
+|  0x63a5aeb18...  |          |  0x809af635b...  |
 |                  |          |                  |
 +------------------+          +-------^--+-------+
                                       |  |
@@ -40,7 +40,7 @@ The Main Donation address is the `Campaign` contract which receives Ether and ge
                               +-------+--v-------+          +------------------+
                               |                  |          |                  |
                               |     Campaign     |          |       Vault      |
-                              |                  +---------->                  |
+        Donations +---------->|                  +---------->                  |
                               |  0xa5a8ab2c6...  |          |  0x598ab825d...  |
                               |                  |          |                  |
                               +------------------+          +------------------+
@@ -49,7 +49,7 @@ The Main Donation address is the `Campaign` contract which receives Ether and ge
 ### MYD Token Deployment Walkthrough
 
 #### Token Factory (Deployed, everything is static)
-The Token Factory allows you to clone the token to upgrade, create a vote, offer select ICO access, basically give anyone that has this token the ability to do something special… this is permissionless too ;-) anyone can do this :-D
+The Token Factory allows you to clone the token to upgrade, create a vote, offer select ICO access, basically give anyone that has this token the ability to do something special… this is permissionless too ;-) anyone can do clone a token and add any feature they want :-D
 
 When setting up a campaign this is the very first step since it’s not in any way linked to any campaign. Generally speaking it’s a good idea to use the newest Token Factory available.
 
@@ -87,7 +87,7 @@ Here are the paremters we're using when calling `createCloneToke`.
 
 ---
 
-I set the GWEI costs to .1 because I’m cheap. Time to go get a glass of water while Ethereum deploys an ENTIRE CLONED VERSION of the MYD token for approximately the same amount that a credit card company charges for transaction fees on a cup of coffee (.07 cents).
+I set the gasPrice to .1 GWEI because I’m cheap. Time to go get a glass of water while Ethereum deploys an ENTIRE CLONED VERSION of the MYD token for approximately the same amount that a credit card company charges for transaction fees on a cup of coffee (.07 cents).
 
 Now that we’ve cloned the token we can get the address of the newly cloned token from the Event Logs of the [`createCloneToken` transaction](https://etherscan.io/tx/0x29cb7595d7c3d9cc743f44bed58ada98514db6643bcdb515dedf0e3b154dc7ac).
 
@@ -216,7 +216,7 @@ So now all of the contracts should be deployed, all that’s left is to transfer
 #### Main Addresses Used
 1. Secure Ledger -- 0xb8Bed6a570cA87d03E4E386f27D14822179d10f9
   
-  You will use this to approve milestones on main net.
+  MEW will use this to approve milestones on main net.
 
 2. Super Secure Ledger -- 0xDdA882a62600C452419145781e45052fdC06382C
   
